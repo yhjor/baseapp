@@ -157,13 +157,15 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
         const onSelectCountry = value => this.selectCountry(dataCountries[value]);
 
         return (
-          <div className="pg-confirm__content-identity">
+          <form className="pg-confirm__content-identity" autoComplete="on">
             <div className="pg-confirm__content-identity-forms">
                 <div className="pg-confirm__content-identity-col">
                     <div className="pg-confirm__content-identity-col-row">
                         <fieldset className={firstNameGroupClass}>
                             <CustomInput
                                 type="string"
+                                name="fname"
+                                autoComplete="given-name"
                                 inputValue={firstName}
                                 placeholder={this.translate('page.body.kyc.identity.firstName')}
                                 handleChangeInput={e => this.handleChange(e, 'firstName')}
@@ -178,6 +180,8 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                         <fieldset className={lastNameGroupClass}>
                             <CustomInput
                                 type="string"
+                                name="lname"
+                                autoComplete="family-name"
                                 inputValue={lastName}
                                 handleChangeInput={e => this.handleChange(e, 'lastName')}
                                 placeholder={this.translate('page.body.kyc.identity.lastName')}
@@ -227,6 +231,8 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                                 defaultLabel={residentialAddress ? this.translate('page.body.kyc.identity.residentialAddress') : ''}
                                 handleChangeInput={e => this.handleChange(e, 'residentialAddress')}
                                 handleFocusInput={this.handleFieldFocus('residentialAddress')}
+                                name="ship-address"
+                                autoComplete="shipping street-address"
                             />
                         </fieldset>
                     </div>
@@ -253,6 +259,8 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                                 label={city ? this.translate('page.body.kyc.identity.city') : ''}
                                 defaultLabel={city ? this.translate('page.body.kyc.identity.city') : ''}
                                 handleFocusInput={this.handleFieldFocus('city')}
+                                name="ship-city"
+                                autoComplete="shipping locality"
                             />
                         </fieldset>
                     </div>
@@ -267,6 +275,8 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                                 onKeyPress={this.handleConfirmEnterPress}
                                 placeholder={this.translate('page.body.kyc.identity.postcode')}
                                 handleFocusInput={this.handleFieldFocus('postcode')}
+                                name="ship-zip"
+                                autoComplete="shipping postal-code"
                             />
                         </fieldset>
                     </div>
@@ -279,13 +289,13 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                         disabled={this.handleCheckButtonDisabled()}
                         size="lg"
                         variant="primary"
-                        type="button"
+                        type="submit"
                         block={true}
                     >
                         {this.translate('page.body.kyc.next')}
                     </Button>
               </div>
-          </div>
+          </form>
         );
     }
 
