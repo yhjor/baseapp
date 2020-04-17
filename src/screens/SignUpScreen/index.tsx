@@ -388,16 +388,6 @@ class SignUp extends React.Component<Props> {
 
         if (refId) {
             switch (configs.captcha_type) {
-                case 'none':
-                    this.props.signUp({
-                        email,
-                        password,
-                        refid: refId,
-                        data: JSON.stringify({
-                            language: i18n,
-                        }),
-                    });
-                    break;
                 case 'recaptcha':
                 case 'geetest':
                     this.props.signUp({
@@ -405,13 +395,15 @@ class SignUp extends React.Component<Props> {
                         password,
                         captcha_response,
                         refid: refId,
+                        data: JSON.stringify({
+                            language: i18n,
+                        }),
                     });
                     break;
                 default:
                     this.props.signUp({
                         email,
                         password,
-                        captcha_response,
                         refid: refId,
                         data: JSON.stringify({
                             language: i18n,
@@ -421,22 +413,21 @@ class SignUp extends React.Component<Props> {
             }
         } else {
             switch (configs.captcha_type) {
-                case 'none':
+                case 'recaptcha':
+                case 'geetest':
                     this.props.signUp({
                         email,
                         password,
+                        captcha_response,
                         data: JSON.stringify({
                             language: i18n,
                         }),
                     });
                     break;
-                case 'recaptcha':
-                case 'geetest':
                 default:
                     this.props.signUp({
                         email,
                         password,
-                        captcha_response,
                         data: JSON.stringify({
                             language: i18n,
                         }),
