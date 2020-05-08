@@ -5,6 +5,7 @@ export * from './checkDate';
 export * from './cleanPositiveFloatInput';
 export * from './convertRgbToHex';
 export * from './countDecimals';
+export * from './countMinValidPriceStep';
 export * from './countSigDigits';
 export * from './emailValidation';
 export * from './filterData';
