@@ -5,6 +5,8 @@ import { Button } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import MaskInput from 'react-maskinput';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import { languages } from '../../../api/config';
 import { CustomInput, DropdownComponent } from '../../../components';
 import { formatDate, isDateInFuture } from '../../../helpers';
@@ -85,12 +87,14 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
 
     public componentDidUpdate(prev: Props) {
         const {
+            history,
             editSuccess,
             sendSuccess,
         } = this.props;
 
         if ((!prev.editSuccess && editSuccess) || (!prev.sendSuccess && sendSuccess)) {
             this.props.labelFetch();
+            history.push('/settings');
         }
     }
 
@@ -435,12 +439,15 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     user: selectUserInfo(state),
 });
 
-const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
         editIdentity: payload => dispatch(editIdentity(payload)),
         sendIdentity: payload => dispatch(sendIdentity(payload)),
         labelFetch: () => dispatch(labelFetch()),
     });
 
-// tslint:disable-next-line
-export const Identity = injectIntl(connect(mapStateToProps, mapDispatchProps)(IdentityComponent) as any);
+export const Identity = compose(
+    injectIntl,
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps),
+)(IdentityComponent) as any; // tslint:disable-line

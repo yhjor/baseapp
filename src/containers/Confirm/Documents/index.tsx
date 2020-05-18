@@ -44,8 +44,10 @@ interface OnChangeEvent {
 interface DocumentsState {
     country: string;
     documentsType: string;
-    expiration: string;
-    expirationFocused: boolean;
+    issuedDate: string;
+    issuedDateFocused: boolean;
+    expireDate: string;
+    expireDateFocused: boolean;
     idNumber: string;
     idNumberFocused: boolean;
     fileFront: File[];
@@ -70,8 +72,10 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
     public state = {
         country: '',
         documentsType: '',
-        expiration: '',
-        expirationFocused: false,
+        issuedDate: '',
+        issuedDateFocused: false,
+        expireDate: '',
+        expireDateFocused: false,
         idNumber: '',
         idNumberFocused: false,
         fileFront: [],
@@ -91,8 +95,10 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
             fileFront,
             fileBack,
             fileSelfie,
-            expiration,
-            expirationFocused,
+            issuedDate,
+            issuedDateFocused,
+            expireDate,
+            expireDateFocused,
             idNumber,
             idNumberFocused,
         }: DocumentsState = this.state;
@@ -104,9 +110,14 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         const dataCountries = Object.values(countries.getNames(lang));
         const onSelectCountry = value => this.selectCountry(dataCountries[value]);
 
-        const expirationFocusedClass = cr('pg-confirm__content-documents__row__content', {
-            'pg-confirm__content-documents__row__content--focused': expirationFocused,
-            'pg-confirm__content-documents__row__content--wrong': expiration && !this.handleValidateInput('expiration', expiration),
+        const issuedDateFocusedClass = cr('pg-confirm__content-documents__row__content', {
+            'pg-confirm__content-documents__row__content--focused': issuedDateFocused,
+            'pg-confirm__content-documents__row__content--wrong': issuedDate && !this.handleValidateInput('issuedDate', issuedDate),
+        });
+
+        const expireDateFocusedClass = cr('pg-confirm__content-documents__row__content', {
+            'pg-confirm__content-documents__row__content--focused': expireDateFocused,
+            'pg-confirm__content-documents__row__content--wrong': expireDate && !this.handleValidateInput('expireDate', expireDate),
         });
 
         const idNumberFocusedClass = cr('pg-confirm__content-documents__row__content', {
@@ -141,7 +152,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                             placeholder={this.translate('page.body.kyc.documentsType.placeholder')}
                         />
                     </div>
-                    <div className="pg-confirm__content-documents__row input-group">
+                    <div className="pg-confirm__content-documents__row">
                         <fieldset className={idNumberFocusedClass}>
                             <CustomInput
                                 type="string"
@@ -154,7 +165,26 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                                 handleFocusInput={this.handleFieldFocus('idNumber')}
                             />
                         </fieldset>
-                        <fieldset className={expirationFocusedClass}>
+                    </div>
+                    <div className="pg-confirm__content-documents__row input-group">
+                        <fieldset className={issuedDateFocusedClass}>
+                            <div className="custom-input">
+                                <label>{this.translate('page.body.kyc.documents.issuedDate')}</label>
+                                <div className="input-group input-group-lg">
+                                    <MaskInput
+                                        maskString="00/00/0000"
+                                        mask="00/00/0000"
+                                        onChange={this.handleChangeIssuedDate}
+                                        onFocus={this.handleFieldFocus('issuedDate')}
+                                        onBlur={this.handleFieldFocus('issuedDate')}
+                                        value={issuedDate}
+                                        className="group-input"
+                                        placeholder={this.translate('page.body.kyc.documents.issuedDate.placeholder')}
+                                    />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset className={expireDateFocusedClass}>
                             <div className="custom-input">
                                 <label>{this.translate('page.body.kyc.documents.expiryDate')}</label>
                                 <div className="input-group input-group-lg">
@@ -162,9 +192,9 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                                         maskString="00/00/0000"
                                         mask="00/00/0000"
                                         onChange={this.handleChangeExpiration}
-                                        onFocus={this.handleFieldFocus('expiration')}
-                                        onBlur={this.handleFieldFocus('expiration')}
-                                        value={expiration}
+                                        onFocus={this.handleFieldFocus('expireDate')}
+                                        onBlur={this.handleFieldFocus('expireDate')}
+                                        value={expireDate}
                                         className="group-input"
                                         placeholder={this.translate('page.body.kyc.documents.expiryDate.placeholder')}
                                     />
@@ -183,30 +213,30 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                         exampleImagePath={DocumentFrontExample}
                         uploadedFile={fileFront[0] && (fileFront[0] as File).name}
                     />
-                    <UploadFile
-                        id="fileBack"
-                        title={this.translate('page.body.kyc.documents.uploadFile.back.title')}
-                        label={this.translate('page.body.kyc.documents.uploadFile.back.label')}
-                        buttonText={this.translate('page.body.kyc.documents.uploadFile.back.button')}
-                        sizesText={this.translate('page.body.kyc.documents.uploadFile.back.sizes')}
-                        formatsText={this.translate('page.body.kyc.documents.uploadFile.back.formats')}
-                        handleUploadScan={uploadEvent => this.handleUploadScan(uploadEvent, 'back')}
-                        exampleImagePath={DocumentBackExample}
-                        uploadedFile={fileBack[0] && (fileBack[0] as File).name}
-                    />
                     {this.state.documentsType !== 'Passport' ? (
                         <UploadFile
-                            id="fileSelfie"
-                            title={this.translate('page.body.kyc.documents.uploadFile.selfie.title')}
-                            label={this.translate('page.body.kyc.documents.uploadFile.selfie.label')}
-                            buttonText={this.translate('page.body.kyc.documents.uploadFile.selfie.button')}
-                            sizesText={this.translate('page.body.kyc.documents.uploadFile.selfie.sizes')}
-                            formatsText={this.translate('page.body.kyc.documents.uploadFile.selfie.formats')}
-                            handleUploadScan={uploadEvent => this.handleUploadScan(uploadEvent, 'selfie')}
-                            exampleImagePath={DocumentSelfieExample}
-                            uploadedFile={fileSelfie[0] && (fileSelfie[0] as File).name}
+                            id="fileBack"
+                            title={this.translate('page.body.kyc.documents.uploadFile.back.title')}
+                            label={this.translate('page.body.kyc.documents.uploadFile.back.label')}
+                            buttonText={this.translate('page.body.kyc.documents.uploadFile.back.button')}
+                            sizesText={this.translate('page.body.kyc.documents.uploadFile.back.sizes')}
+                            formatsText={this.translate('page.body.kyc.documents.uploadFile.back.formats')}
+                            handleUploadScan={uploadEvent => this.handleUploadScan(uploadEvent, 'back')}
+                            exampleImagePath={DocumentBackExample}
+                            uploadedFile={fileBack[0] && (fileBack[0] as File).name}
                         />
                     ) : null}
+                    <UploadFile
+                        id="fileSelfie"
+                        title={this.translate('page.body.kyc.documents.uploadFile.selfie.title')}
+                        label={this.translate('page.body.kyc.documents.uploadFile.selfie.label')}
+                        buttonText={this.translate('page.body.kyc.documents.uploadFile.selfie.button')}
+                        sizesText={this.translate('page.body.kyc.documents.uploadFile.selfie.sizes')}
+                        formatsText={this.translate('page.body.kyc.documents.uploadFile.selfie.formats')}
+                        handleUploadScan={uploadEvent => this.handleUploadScan(uploadEvent, 'selfie')}
+                        exampleImagePath={DocumentSelfieExample}
+                        uploadedFile={fileSelfie[0] && (fileSelfie[0] as File).name}
+                    />
                 </div>
                 <div className="pg-confirm__content-deep">
                     <Button
@@ -239,9 +269,14 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
     private handleFieldFocus = (field: string) => {
         return () => {
             switch (field) {
-                case 'expiration':
+                case 'issuedDate':
                     this.setState({
-                        expirationFocused: !this.state.expirationFocused,
+                        issuedDateFocused: !this.state.issuedDateFocused,
+                    });
+                    break;
+                case 'expireDate':
+                    this.setState({
+                        expireDateFocused: !this.state.expireDateFocused,
                     });
                     break;
                 case 'idNumber':
@@ -261,9 +296,15 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         });
     };
 
+    private handleChangeIssuedDate = (e: OnChangeEvent) => {
+        this.setState({
+            issuedDate: formatDate(e.target.value),
+        });
+    };
+
     private handleChangeExpiration = (e: OnChangeEvent) => {
         this.setState({
-          expiration: formatDate(e.target.value),
+            expireDate: formatDate(e.target.value),
         });
     };
 
@@ -289,7 +330,9 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
 
     private handleValidateInput = (field: string, value: string): boolean => {
         switch (field) {
-            case 'expiration':
+            case 'issuedDate':
+                return !isDateInFuture(value);
+            case 'expireDate':
                 return isDateInFuture(value);
             case 'idNumber':
                 const cityRegex = new RegExp(`^[a-zA-Z0-9]+$`);
@@ -304,7 +347,8 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         const {
             country,
             documentsType,
-            expiration,
+            issuedDate,
+            expireDate,
             fileBack,
             fileFront,
             fileSelfie,
@@ -314,7 +358,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         const typeOfDocuments = this.getDocumentsType(documentsType);
         const filesValid = (typeOfDocuments === 'Passport') ? (
             fileFront.length &&
-            fileBack.length
+            fileSelfie.length
         ) : (
             fileSelfie.length &&
             fileFront.length &&
@@ -323,7 +367,8 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
 
         return (
             !this.handleValidateInput('idNumber', idNumber) ||
-            !this.handleValidateInput('expiration', expiration) ||
+            !this.handleValidateInput('issuedDate', issuedDate) ||
+            (expireDate && !this.handleValidateInput('expireDate', expireDate)) ||
             !country ||
             !filesValid
         );
@@ -333,7 +378,8 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         const {
             country,
             documentsType,
-            expiration,
+            issuedDate,
+            expireDate,
             fileBack,
             fileFront,
             fileSelfie,
@@ -348,16 +394,21 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
 
         const request = new FormData();
 
-        request.append('doc_expire', expiration);
+        if (expireDate) {
+            request.append('doc_expire', expireDate);
+        }
+
+        request.append('doc_issue', issuedDate);
         request.append('doc_type', typeOfDocuments);
         request.append('doc_number', idNumber);
         request.append('doc_country', country);
         request.append('upload[]', fileFront[0]);
-        request.append('upload[]', fileBack[0]);
 
         if (documentsType !== 'Passport') {
-            request.append('upload[]', fileSelfie[0]);
+            request.append('upload[]', fileBack[0]);
         }
+
+        request.append('upload[]', fileSelfie[0]);
 
         this.props.sendDocuments(request);
     };

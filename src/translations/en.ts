@@ -440,7 +440,9 @@ export const en = {
     'page.body.kyc.documentsType.placeholder': 'Select',
     'page.body.kyc.documents.idNumber': 'ID number',
     'page.body.kyc.documents.idNumber.placeholder': 'Your ID number',
-    'page.body.kyc.documents.expiryDate': 'Expiry date',
+    'page.body.kyc.documents.issuedDate': 'Issued date',
+    'page.body.kyc.documents.issuedDate.placeholder': 'DD / MM / YYYY',
+    'page.body.kyc.documents.expiryDate': 'Expiry date (optional)',
     'page.body.kyc.documents.expiryDate.placeholder': 'DD / MM / YYYY',
 
     'page.body.kyc.documents.uploadFile.front.title': 'Front of ID card',

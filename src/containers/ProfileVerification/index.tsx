@@ -85,6 +85,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                         </div>
                     </div>
                 );
+            case 'drafted':
             case 'pending':
                 return (
                     <div key={index} className="pg-profile-page-verification__step pg-profile-page-verification__step--pending">
