@@ -161,12 +161,11 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                         <CustomInput
                             type="string"
                             inputValue={firstName}
-                            placeholder={this.translate('page.body.kyc.identity.firstName.placeholder')}
+                            placeholder={this.translate('page.body.kyc.identity.firstName')}
                             handleChangeInput={e => this.handleChange(e, 'firstName')}
                             autoFocus={true}
                             label={this.translate('page.body.kyc.identity.firstName')}
                             defaultLabel={''}
-                            labelVisible={true}
                             handleFocusInput={this.handleFieldFocus('firstName')}
                         />
                     </fieldset>
@@ -175,10 +174,9 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                             type="string"
                             inputValue={lastName}
                             handleChangeInput={e => this.handleChange(e, 'lastName')}
-                            placeholder={this.translate('page.body.kyc.identity.lastName.placeholder')}
+                            placeholder={this.translate('page.body.kyc.identity.lastName')}
                             label={this.translate('page.body.kyc.identity.lastName')}
                             defaultLabel={''}
-                            labelVisible={true}
                             handleFocusInput={this.handleFieldFocus('lastName')}
                         />
                     </fieldset>
@@ -186,7 +184,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                 <div className="pg-confirm__content-identity__forms__row">
                     <fieldset className={dateOfBirthGroupClass}>
                         <div className="custom-input">
-                            <label>{this.translate('page.body.kyc.identity.dateOfBirth')}</label>
+                            {dateOfBirth ? <label>{this.translate('page.body.kyc.identity.dateOfBirth')}</label> : null}
                             <div className="input-group input-group-lg">
                                 <MaskInput
                                     className="pg-confirm__content-identity__forms__row__content-number"
@@ -204,14 +202,11 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                 </div>
                 <div className="pg-confirm__content-identity__forms__row">
                     <div className="pg-confirm__content-identity__forms__row__content">
-                        <div className="pg-confirm__content-identity__forms__row__content-label">
-                            {this.translate('page.body.kyc.identity.CoR')}
-                        </div>
                         <DropdownComponent
                             className="pg-confirm__content-identity__forms__row__content-number-dropdown"
                             list={dataCountries}
                             onSelect={onSelectCountry}
-                            placeholder={this.translate('page.body.kyc.identity.CoR.placeholder')}
+                            placeholder={this.translate('page.body.kyc.identity.CoR')}
                         />
                     </div>
                 </div>
@@ -223,7 +218,6 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                             placeholder={this.translate('page.body.kyc.identity.residentialAddress')}
                             label={this.translate('page.body.kyc.identity.residentialAddress')}
                             defaultLabel={''}
-                            labelVisible={true}
                             handleChangeInput={e => this.handleChange(e, 'residentialAddress')}
                             handleFocusInput={this.handleFieldFocus('residentialAddress')}
                         />
@@ -235,10 +229,9 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                             type="string"
                             inputValue={city}
                             handleChangeInput={e => this.handleChange(e, 'city')}
-                            placeholder={this.translate('page.body.kyc.identity.city.placeholder')}
+                            placeholder={this.translate('page.body.kyc.identity.city')}
                             label={this.translate('page.body.kyc.identity.city')}
                             defaultLabel={''}
-                            labelVisible={true}
                             handleFocusInput={this.handleFieldFocus('city')}
                         />
                     </fieldset>
@@ -246,12 +239,11 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                         <CustomInput
                             label={this.translate('page.body.kyc.identity.postcode')}
                             defaultLabel={this.translate('page.body.kyc.identity.postcode')}
-                            labelVisible={true}
                             type="string"
                             inputValue={postcode}
                             handleChangeInput={e => this.handleChange(e, 'postcode')}
                             onKeyPress={this.handleConfirmEnterPress}
-                            placeholder={this.translate('page.body.kyc.identity.postcode.placeholder')}
+                            placeholder={this.translate('page.body.kyc.identity.postcode')}
                             handleFocusInput={this.handleFieldFocus('postcode')}
                         />
                     </fieldset>

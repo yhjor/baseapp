@@ -127,7 +127,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                             <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
                             <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
                         </div>
-                        <div className="pg-profile-page-verification__step__button">
+                        <div className="pg-profile-page-verification__step__button btn btn-primary">
                             <Link to="/confirm"><FormattedMessage id="page.body.profile.verification.verify" /></Link>
                         </div>
                     </div>
@@ -139,7 +139,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                             <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
                             <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
                         </div>
-                        <div className="pg-profile-page-verification__step__button">
+                        <div className="pg-profile-page-verification__step__button btn btn-primary">
                             <Link to="/confirm"><FormattedMessage id="page.body.profile.verification.verify" /></Link>
                         </div>
                     </div>

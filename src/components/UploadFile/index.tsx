@@ -85,7 +85,7 @@ export class UploadFile extends React.Component<Props, State> {
                             onChange={this.props.handleUploadScan}
                         />
                         <div className="pg-upload-file__content__form__info">
-                            {buttonText ? <span className="pg-upload-file__content__form__info__button">{buttonText}</span> : null}
+                            {buttonText ? <span className="pg-upload-file__content__form__info__button btn-primary">{buttonText}</span> : null}
                             {sizesText ? <span className="pg-upload-file__content__form__info__text">{sizesText}</span> : null}
                             {formatsText ? <span className="pg-upload-file__content__form__info__text">{formatsText}</span> : null}
                             {uploadedFile ? <span className="pg-upload-file__content__form__info__text file">{uploadedFile}</span> : null}
