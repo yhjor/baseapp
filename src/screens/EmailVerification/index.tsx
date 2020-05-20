@@ -208,4 +208,4 @@ export const EmailVerificationScreen = compose(
     injectIntl,
     withRouter,
     connect(mapStateToProps, mapDispatchProps),
-)(EmailVerificationComponent) as any; // tslint:disable-line
+)(EmailVerificationComponent) as React.ComponentType;

@@ -77,7 +77,7 @@ class ForgotPasswordComponent extends React.Component<Props, ForgotPasswordState
     }
 
     public UNSAFE_componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.error) {
+        if (nextProps.error && !this.props.error) {
             if (this.reCaptchaRef.current) {
                 this.reCaptchaRef.current.reset();
             }
@@ -252,6 +252,6 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
 
 export const ForgotPasswordScreen = compose(
     injectIntl,
-    withRouter,
+withRouter,
     connect(mapStateToProps, mapDispatchToProps),
-)(ForgotPasswordComponent) as any; // tslint:disable-line
+)(ForgotPasswordComponent) as React.ComponentType;

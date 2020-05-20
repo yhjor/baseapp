@@ -44,7 +44,7 @@ export class EmailForm extends React.Component<EmailFormProps> {
         } = this.props;
 
         const emailFormClass = cr('cr-email-form', {
-            'cr-email-form-high': captchaType && captchaType !== 'none',
+            'cr-email-form--high': captchaType && captchaType !== 'none',
         });
 
         const emailGroupClass = cr('cr-email-form__group', {
@@ -88,7 +88,7 @@ export class EmailForm extends React.Component<EmailFormProps> {
                             <Button
                                 block={true}
                                 type="button"
-                                disabled={this.disableButton()}
+                                disabled={this.isButtonDisabled()}
                                 onClick={e => this.handleClick(e)}
                                 size="lg"
                                 variant="primary"
@@ -128,7 +128,7 @@ export class EmailForm extends React.Component<EmailFormProps> {
         }
     };
 
-    private disableButton = (): boolean => {
+    private isButtonDisabled = (): boolean => {
         const {
             email,
             isLoading,
