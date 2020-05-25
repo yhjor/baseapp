@@ -6,6 +6,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import { languages } from '../../../api/config';
 import { CustomInput, UploadFile } from '../../../components';
 import { DropdownComponent } from '../../../components/Dropdown';
@@ -53,7 +54,7 @@ class AddressComponent extends React.Component<Props, State> {
     };
 
     public UNSAFE_componentWillReceiveProps(next: Props) {
-        if (next.success){
+        if (next.success) {
             this.props.history.push('/settings');
         }
     }
@@ -290,11 +291,14 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     success: selectSendAddressesSuccess(state),
 });
 
-const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
         fetchAlert: payload => dispatch(alertPush(payload)),
         sendAddresses: payload => dispatch(sendAddresses(payload)),
     });
 
-// tslint:disable-next-line:no-any
-export const Address = injectIntl(withRouter(connect(mapStateToProps, mapDispatchProps)(AddressComponent) as any));
+export const Address = compose(
+    injectIntl,
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps),
+)(AddressComponent) as any; // tslint:disable-line

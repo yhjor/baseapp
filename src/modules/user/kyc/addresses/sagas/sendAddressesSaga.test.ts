@@ -1,9 +1,9 @@
 import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
-import { rootSaga } from '../../..';
-import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
-import { sendAddresses } from './actions';
+import { rootSaga } from '../../../..';
+import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../../helpers/jest';
+import { sendAddresses } from '../actions';
 
 const debug = false;
 

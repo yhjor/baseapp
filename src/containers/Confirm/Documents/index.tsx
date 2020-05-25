@@ -7,6 +7,7 @@ import MaskInput from 'react-maskinput';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import { languages } from '../../../api/config';
 import {
     CustomInput,
@@ -84,7 +85,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
     };
 
     public UNSAFE_componentWillReceiveProps(next: Props) {
-        if (next.success){
+        if (next.success) {
             this.props.history.push('/settings');
         }
     }
@@ -428,11 +429,14 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     success: selectSendDocumentsSuccess(state),
 });
 
-const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
         fetchAlert: payload => dispatch(alertPush(payload)),
         sendDocuments: payload => dispatch(sendDocuments(payload)),
     });
 
-// tslint:disable-next-line:no-any
-export const Documents = injectIntl(withRouter(connect(mapStateToProps, mapDispatchProps)(DocumentsComponent) as any));
+    export const Documents = compose(
+    injectIntl,
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps),
+)(DocumentsComponent) as any; // tslint:disable-line
