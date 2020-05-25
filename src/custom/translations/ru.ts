@@ -421,6 +421,8 @@ export const ru: LangType = {
     'page.body.profile.verification.pending': 'Pending',
     'page.body.profile.verification.reverify': 'Reverify',
     'page.body.profile.verification.verify': 'Verify',
+    'page.body.profile.verification.verified': 'Verified',
+    'page.body.profile.verification.progress.level': 'level',
 
 
     /* KYC */

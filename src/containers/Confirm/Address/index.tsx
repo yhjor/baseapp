@@ -136,9 +136,6 @@ class AddressComponent extends React.Component<Props, State> {
                         </fieldset>
                     </div>
                     <div className="pg-confirm__content-address__row__content">
-                        <div className="pg-confirm__content-address__row__content-label">
-                            {this.translate('page.body.kyc.address.country')}
-                        </div>
                         <DropdownComponent
                             className="pg-confirm__content-address__row__content-number-dropdown"
                             list={dataCountries}

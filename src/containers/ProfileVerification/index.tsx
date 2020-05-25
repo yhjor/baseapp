@@ -8,9 +8,9 @@ import { changeElementPosition } from '../../helpers/changeElementPosition';
 import { Label, labelFetch, selectLabelData, selectUserInfo, User } from '../../modules';
 
 /* Icons */
-const SuccessIcon = require('../../assets/images/kyc/SuccessIcon.svg');
-const PendingIcon = require('../../assets/images/kyc/PendingIcon.svg');
-const RejectedIcon = require('../../assets/images/kyc/RejectedIcon.svg');
+const CheckIcon = require('../../assets/images/kyc/CheckIcon.svg');
+const ClocksIcon = require('../../assets/images/kyc/ClocksIcon.svg');
+const CrossIcon = require('../../assets/images/kyc/CrossIcon.svg');
 
 interface ReduxProps {
     labels: Label[];
@@ -39,27 +39,56 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
         this.props.labelFetch();
     }
 
-    public renderProgressBar(labels: Label[]) {
-        const verifiedLabelsCount = labels.length ? (
-            labels.filter((label: Label) => KYC_STEPS.includes(label.key) && label.value === 'verified' && label.scope === 'private').length
-         ) : 0;
-        const progressValue =  `${verifiedLabelsCount / KYC_STEPS.length * 100}%`;
-        const filledStyle = progressValue === '100%' ? {width: progressValue} : (
-            {
-                borderBottomRightRadius: '0',
-                borderTopRightRadius: '0',
-                width: progressValue,
-            }
-        );
+    public renderProgressBarStep = (step: string, index: number, labels: Label[]) => {
+        const targetLabelStatus = this.handleCheckLabel(labels, step);
 
+        switch (targetLabelStatus) {
+            case 'verified':
+                return (
+                    <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--verified">
+                        <FormattedMessage id={`page.body.profile.verification.progress.level`} />
+                        <span>&nbsp;{index + 1}</span>
+                        <img src={CheckIcon} alt="Verified"/>
+                    </div>
+                );
+            case 'drafted':
+            case 'pending':
+                return (
+                    <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--pending">
+                        <FormattedMessage id={`page.body.profile.verification.progress.level`} />
+                        <span>&nbsp;{index + 1}</span>
+                        <img src={ClocksIcon} alt="Pending"/>
+                    </div>
+                );
+            case 'rejected':
+                return (
+                    <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--rejected">
+                        <FormattedMessage id={`page.body.profile.verification.progress.level`} />
+                        <span>&nbsp;{index + 1}</span>
+                        <img src={CrossIcon} alt="Rejected"/>
+                    </div>
+                );
+            case 'blocked':
+                return (
+                    <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--blocked">
+                        <FormattedMessage id={`page.body.profile.verification.progress.level`} />
+                        <span>&nbsp;{index + 1}</span>
+                    </div>
+                );
+            default:
+                return (
+                    <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--active">
+                        <FormattedMessage id={`page.body.profile.verification.progress.level`} />
+                        <span>&nbsp;{index + 1}</span>
+                    </div>
+                );
+        }
+    };
+
+    public renderProgressBar(labels: Label[]) {
         return (
             <div className="pg-profile-page-verification__progress-bar">
-                <span
-                    className="pg-profile-page-verification__progress-bar--filled"
-                    style={filledStyle}
-                >
-                    {verifiedLabelsCount ? progressValue : null}
-                </span>
+                {KYC_STEPS.map((step, index) => this.renderProgressBarStep(step, index, labels))}
             </div>
         );
     }
@@ -77,11 +106,16 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                 return (
                     <div key={index} className="pg-profile-page-verification__step pg-profile-page-verification__step--verified">
                         <div className="pg-profile-page-verification__step__info">
-                            <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
-                            <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
+                            <div className="pg-profile-page-verification__step__info__title">
+                                <span>{index + 1}.&nbsp;</span>
+                                <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
+                            </div>
+                            <div className="pg-profile-page-verification__step__info__subtitle">
+                                <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
+                            </div>
                         </div>
-                        <div className="pg-profile-page-verification__step__icon">
-                            <img src={SuccessIcon} alt="Success Icon" />
+                        <div className="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--verified">
+                            <FormattedMessage id="page.body.profile.verification.verified" />
                         </div>
                     </div>
                 );
@@ -90,12 +124,16 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                 return (
                     <div key={index} className="pg-profile-page-verification__step pg-profile-page-verification__step--pending">
                         <div className="pg-profile-page-verification__step__info">
-                            <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
-                            <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
+                            <div className="pg-profile-page-verification__step__info__title">
+                                <span>{index + 1}.&nbsp;</span>
+                                <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
+                            </div>
+                            <div className="pg-profile-page-verification__step__info__subtitle">
+                                <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
+                            </div>
                         </div>
-                        <div className="pg-profile-page-verification__step__icon">
+                        <div className="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--pending">
                             <FormattedMessage id="page.body.profile.verification.pending" />
-                            <img src={PendingIcon} alt="Pending Icon" />
                         </div>
                     </div>
                 );
@@ -103,18 +141,20 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                 return (
                     <div key={index} className="pg-profile-page-verification__step pg-profile-page-verification__step--rejected">
                         <div className="pg-profile-page-verification__step__info">
-                            <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
-                            <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
+                            <div className="pg-profile-page-verification__step__info__title">
+                                <span>{index + 1}.&nbsp;</span>
+                                <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
+                            </div>
+                            <div className="pg-profile-page-verification__step__info__subtitle">
+                                <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
+                            </div>
                         </div>
                         <div
-                            className="pg-profile-page-verification__step__icon"
+                            className="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--rejected"
                             onMouseEnter={e => this.handleHoverTooltipIcon()}
                             onMouseLeave={e => this.handleToggleTooltipVisible()}
                         >
-                            <Link to="/confirm">
-                                <FormattedMessage id="page.body.profile.verification.reverify" />
-                            </Link>
-                            <img src={RejectedIcon} alt="Rejected Icon" />
+                            <Link to="/confirm"><FormattedMessage id="page.body.profile.verification.reverify" /></Link>
                         </div>
                         <span className={tooltipClass}>
                             <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.rejected.tooltip`} />
@@ -125,10 +165,15 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                 return (
                     <div key={index} className="pg-profile-page-verification__step pg-profile-page-verification__step--blocked">
                         <div className="pg-profile-page-verification__step__info">
-                            <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
-                            <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
+                            <div className="pg-profile-page-verification__step__info__title">
+                                <span>{index + 1}.&nbsp;</span>
+                                <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
+                            </div>
+                            <div className="pg-profile-page-verification__step__info__subtitle">
+                                <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
+                            </div>
                         </div>
-                        <div className="pg-profile-page-verification__step__button btn btn-primary">
+                        <div className="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--blocked">
                             <Link to="/confirm"><FormattedMessage id="page.body.profile.verification.verify" /></Link>
                         </div>
                     </div>
@@ -137,10 +182,15 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                 return (
                     <div key={index} className="pg-profile-page-verification__step pg-profile-page-verification__step--active">
                         <div className="pg-profile-page-verification__step__info">
-                            <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
-                            <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
+                            <div className="pg-profile-page-verification__step__info__title">
+                                <span>{index + 1}.&nbsp;</span>
+                                <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.title`} />
+                            </div>
+                            <div className="pg-profile-page-verification__step__info__subtitle">
+                                <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
+                            </div>
                         </div>
-                        <div className="pg-profile-page-verification__step__button btn btn-primary">
+                        <div className="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--active">
                             <Link to="/confirm"><FormattedMessage id="page.body.profile.verification.verify" /></Link>
                         </div>
                     </div>
