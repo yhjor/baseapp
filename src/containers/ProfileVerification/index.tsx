@@ -8,9 +8,10 @@ import { changeElementPosition } from '../../helpers/changeElementPosition';
 import { Label, labelFetch, selectLabelData, selectUserInfo, User } from '../../modules';
 
 /* Icons */
-const CheckIcon = require('../../assets/images/kyc/CheckIcon.svg');
-const ClocksIcon = require('../../assets/images/kyc/ClocksIcon.svg');
-const CrossIcon = require('../../assets/images/kyc/CrossIcon.svg');
+import { CheckBigIcon } from '../../assets/images/kyc/CheckBigIcon';
+import { CheckIcon } from '../../assets/images/kyc/CheckIcon';
+import { ClocksIcon } from '../../assets/images/kyc/ClocksIcon';
+import { CrossIcon } from '../../assets/images/kyc/CrossIcon';
 
 interface ReduxProps {
     labels: Label[];
@@ -48,7 +49,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                     <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--verified">
                         <FormattedMessage id={`page.body.profile.verification.progress.level`} />
                         <span>&nbsp;{index + 1}</span>
-                        <img src={CheckIcon} alt="Verified"/>
+                        <CheckIcon />
                     </div>
                 );
             case 'drafted':
@@ -57,7 +58,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                     <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--pending">
                         <FormattedMessage id={`page.body.profile.verification.progress.level`} />
                         <span>&nbsp;{index + 1}</span>
-                        <img src={ClocksIcon} alt="Pending"/>
+                        <ClocksIcon />
                     </div>
                 );
             case 'rejected':
@@ -65,7 +66,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                     <div className="pg-profile-page-verification__progress-bar__step pg-profile-page-verification__progress-bar__step--rejected">
                         <FormattedMessage id={`page.body.profile.verification.progress.level`} />
                         <span>&nbsp;{index + 1}</span>
-                        <img src={CrossIcon} alt="Rejected"/>
+                        <CrossIcon />
                     </div>
                 );
             case 'blocked':
@@ -114,8 +115,9 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                                 <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
                             </div>
                         </div>
-                        <div className="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--verified">
+                        <div className="pg-profile-page-verification__step__label pg-profile-page-verification__step__label--verified">
                             <FormattedMessage id="page.body.profile.verification.verified" />
+                            <CheckBigIcon />
                         </div>
                     </div>
                 );
@@ -132,8 +134,9 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                                 <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.subtitle`} />
                             </div>
                         </div>
-                        <div className="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--pending">
+                        <div className="pg-profile-page-verification__step__label pg-profile-page-verification__step__label--pending">
                             <FormattedMessage id="page.body.profile.verification.pending" />
+                            <ClocksIcon />
                         </div>
                     </div>
                 );
@@ -150,11 +153,12 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                             </div>
                         </div>
                         <div
-                            className="pg-profile-page-verification__step__button pg-profile-page-verification__step__button--rejected"
+                            className="pg-profile-page-verification__step__label pg-profile-page-verification__step__label--rejected"
                             onMouseEnter={e => this.handleHoverTooltipIcon()}
                             onMouseLeave={e => this.handleToggleTooltipVisible()}
                         >
                             <Link to="/confirm"><FormattedMessage id="page.body.profile.verification.reverify" /></Link>
+                            <CrossIcon />
                         </div>
                         <span className={tooltipClass}>
                             <FormattedMessage id={`page.body.profile.verification.${labelToCheck}.rejected.tooltip`} />
