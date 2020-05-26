@@ -8,7 +8,7 @@ class FooterComponent extends React.Component<RouterProps> {
             return <React.Fragment />;
         }
 
-        return null
+        return null;
     }
 }
 
