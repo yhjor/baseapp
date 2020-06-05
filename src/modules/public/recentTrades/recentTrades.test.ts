@@ -38,7 +38,7 @@ describe('Trades module', () => {
             total: '0.00059',
             amount: '0.059',
             market: 'bchbtc',
-            created_at: '2018-12-18T14:21:23+01:00',
+            created_at: '2019-12-18T14:21:23+01:00',
             taker_type: 'sell',
         },
         {
@@ -47,7 +47,7 @@ describe('Trades module', () => {
             total: '0.0001',
             amount: '0.01',
             market: 'bchbtc',
-            created_at: '2018-12-18T14:21:23+01:00',
+            created_at: '2019-12-18T14:21:23+01:00',
             taker_type: 'buy',
         },
         {
@@ -56,7 +56,7 @@ describe('Trades module', () => {
             total: '0.0005',
             amount: '0.01',
             market: 'bchbtc',
-            created_at: '2018-12-18T14:21:23+01:00',
+            created_at: '2019-12-18T14:21:23+01:00',
             taker_type: 'buy',
         },
     ];
@@ -87,7 +87,7 @@ describe('Trades module', () => {
                 total: '0.00059',
                 amount: '0.059',
                 market: 'bchbtc',
-                created_at: '2018-12-18T14:21:23+01:00',
+                created_at: '2019-12-18T14:21:23+01:00',
                 taker_type: 'sell',
             },
             {
@@ -96,7 +96,7 @@ describe('Trades module', () => {
                 total: '0.0001',
                 amount: '0.01',
                 market: 'bchbtc',
-                created_at: '2018-12-18T14:21:23+01:00',
+                created_at: '2019-12-18T14:21:23+01:00',
                 taker_type: 'buy',
             },
             {
@@ -105,7 +105,7 @@ describe('Trades module', () => {
                 total: '0.0005',
                 amount: '0.01',
                 market: 'bchbtc',
-                created_at: '2018-12-18T14:21:23+01:00',
+                created_at: '2019-12-18T14:21:23+01:00',
                 taker_type: 'buy',
             },
         ],

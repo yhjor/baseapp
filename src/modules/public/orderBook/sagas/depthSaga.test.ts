@@ -24,10 +24,10 @@ describe('Saga: depth', () => {
     });
 
     const fakeMarket: Market = {
-        id: 'btczar',
-        name: 'BTC/ZAR',
+        id: 'btcrht',
+        name: 'BTC/RHT',
         base_unit: 'btc',
-        quote_unit: 'zar',
+        quote_unit: 'rht',
         min_price: '0.0',
         max_price: '0.0',
         min_amount: '0.0',
@@ -64,7 +64,7 @@ describe('Saga: depth', () => {
     };
 
     const mockDepth = () => {
-        mockAxios.onGet('/public/markets/btczar/depth').reply(200, fakeDepth);
+        mockAxios.onGet('/public/markets/btcrht/depth').reply(200, fakeDepth);
     };
 
     const expectedActionsFetch = [depthFetch(fakeMarket), depthData(fakeDepth)];

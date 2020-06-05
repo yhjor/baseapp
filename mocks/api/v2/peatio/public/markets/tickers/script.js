@@ -1,7 +1,7 @@
 var ts = parseInt(Date.now() / 1000);
 
 module.exports = {
-    "btczar": {
+    "btcrht": {
         "at": ts,
         "ticker": {
             "amount": "60.0",
@@ -85,7 +85,7 @@ module.exports = {
             "price_change_percent": "+0.12%"
         }
     },
-    "xrpzar": {
+    "xrprht": {
         "at": ts,
         "ticker": {
             "amount": "11.0",
@@ -99,7 +99,7 @@ module.exports = {
             "price_change_percent": "+0.48%"
         }
     },
-    "ltczar": {
+    "ltcrht": {
         "at": ts,
         "ticker": {
             "amount": "13.0",
@@ -127,7 +127,7 @@ module.exports = {
             "price_change_percent": "+0.04%"
         }
     },
-    "ethzar": {
+    "ethrht": {
         "at": ts,
         "ticker": {
             "amount": "8.0",
@@ -141,7 +141,7 @@ module.exports = {
             "price_change_percent": "-5.84%"
         }
     },
-    "dashzar": {
+    "dashrht": {
         "at": ts,
         "ticker": {
             "amount": "9.0",
@@ -155,7 +155,7 @@ module.exports = {
             "price_change_percent": "+0.80%"
         }
     },
-    "btczar": {
+    "btcrht": {
         "at": ts,
         "ticker": {
             "amount": "5.0",

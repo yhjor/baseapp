@@ -92,8 +92,8 @@ Access-Control-Allow-Credentials: true
     "precision": 8
   },
   {
-    "id": "trst",
-    "name": "WeTrust",
+    "id": "rht",
+    "name": "Race Horse Token",
     "symbol": "Ξ",
     "explorer_transaction": "https://rinkeby.etherscan.io/tx/#{txid}",
     "explorer_address": "https://rinkeby.etherscan.io/address/#{address}",
@@ -103,10 +103,10 @@ Access-Control-Allow-Credentials: true
     "withdraw_fee": "0.02",
     "withdraw_limit_24h": "300.0",
     "withdraw_limit_72h": "600.0",
-    "deposit_enabled": false,
+    "deposit_enabled": true,
     "withdrawal_enabled": true,
-    "base_factor": 1000000,
-    "precision": 8
+    "base_factor": 10000,
+    "precision": 4
   },
   {
     "id": "usd",
@@ -140,21 +140,6 @@ Access-Control-Allow-Credentials: true
     "base_factor": 1000000,
     "precision": 8
   },
-  {
-    "id": "zar",
-    "name": "ZAR",
-    "symbol": "$",
-    "type": "fiat",
-    "min_confirmations": 7,
-    "deposit_fee": "0.0",
-    "withdraw_fee": "0.02",
-    "withdraw_limit_24h": "100.0",
-    "withdraw_limit_72h": "200.0",
-    "deposit_enabled": true,
-    "withdrawal_enabled": false,
-    "base_factor": 1,
-    "precision": 2
-   },
   {
     "id": "eur",
     "name": "Euro",

@@ -8,10 +8,10 @@ Access-Control-Allow-Credentials: true
 
 [
   {
-    "id": "btczar",
-    "name": "BTC/ZAR",
+    "id": "btcrht",
+    "name": "BTC/RHT",
     "base_unit": "btc",
-    "quote_unit": "zar",
+    "quote_unit": "rht",
     "ask_fee": "0.0015",
     "bid_fee": "0.0015",
     "min_price": "0.0",
@@ -22,10 +22,10 @@ Access-Control-Allow-Credentials: true
     "state": "enabled"
   },
   {
-    "id": "bchzar",
-    "name": "BCH/ZAR",
+    "id": "bchrht",
+    "name": "BCH/RHT",
     "base_unit": "bch",
-    "quote_unit": "zar",
+    "quote_unit": "rht",
     "ask_fee": "0.0015",
     "bid_fee": "0.0015",
     "min_price": "0.0",
@@ -50,6 +50,20 @@ Access-Control-Allow-Credentials: true
     "state": "enabled"
   },
   {
+    "id": "ethrht",
+    "name": "ETH/RHT",
+    "base_unit": "eth",
+    "quote_unit": "rht",
+    "ask_fee": "0.0025",
+    "bid_fee": "0.002",
+    "min_price": "0.0",
+    "max_price": "0.0",
+    "min_amount": "0.0",
+    "amount_precision": 4,
+    "price_precision": 4,
+    "state": "enabled"
+  },
+  {
     "id": "dashbtc",
     "name": "DASH/BTC",
     "base_unit": "dash",
@@ -63,6 +77,7 @@ Access-Control-Allow-Credentials: true
     "price_precision": 4,
     "state": "enabled"
   },
+  
   {
     "id": "eurusd",
     "name": "EUR/USD",

@@ -179,12 +179,12 @@ describe('Helpers', () => {
 
     // localeDate.ts
     it('Should return correct locale date', () => {
-        expect(helpers.localeDate('2018-11-29T16:54:46+01:00', 'fullDate', 'Europe/Kiev')).toBe('29-11-2018 17:54:46');
-        expect(helpers.localeDate('2018-11-12T16:55:12-01:00', 'fullDate', 'Europe/Kiev')).toBe('12-11-2018 19:55:12');
-        expect(helpers.localeDate('2018-11-29T16:54:46+01:00', 'shortDate', 'Europe/Kiev')).toBe('29-11-2018 17:54');
-        expect(helpers.localeDate('2018-11-12T16:55:12-01:00', 'shortDate', 'Europe/Kiev')).toBe('12-11-2018 19:55');
-        expect(helpers.localeDate('2018-11-29T16:54:46+01:00', 'time', 'Europe/Kiev')).toBe('17:54:46');
-        expect(helpers.localeDate('2018-11-12T16:55:12-01:00', 'time', 'Europe/Kiev')).toBe('19:55:12');
+        expect(helpers.localeDate('2019-11-29T16:54:46+01:00', 'fullDate', 'Europe/Kiev')).toBe('29-11-2018 17:54:46');
+        expect(helpers.localeDate('2019-11-12T16:55:12-01:00', 'fullDate', 'Europe/Kiev')).toBe('12-11-2018 19:55:12');
+        expect(helpers.localeDate('2019-11-29T16:54:46+01:00', 'shortDate', 'Europe/Kiev')).toBe('29-11-2018 17:54');
+        expect(helpers.localeDate('2019-11-12T16:55:12-01:00', 'shortDate', 'Europe/Kiev')).toBe('12-11-2018 19:55');
+        expect(helpers.localeDate('2019-11-29T16:54:46+01:00', 'time', 'Europe/Kiev')).toBe('17:54:46');
+        expect(helpers.localeDate('2019-11-12T16:55:12-01:00', 'time', 'Europe/Kiev')).toBe('19:55:12');
     });
 
     // preciseNumber.js
@@ -197,7 +197,7 @@ describe('Helpers', () => {
 
     // handleCCYPrecision.ts
     it('Should return correctly precised numbers', () => {
-        const currencies = [{id: 'eth', precision: 5}, {id: 'usd', precision: 4}, {id: 'btc', precision: 8}, {id: 'zar', precision: 8}] as Currency[];
+        const currencies = [{id: 'eth', precision: 5}, {id: 'usd', precision: 4}, {id: 'btc', precision: 8}, {id: 'rht', precision: 8}] as Currency[];
         expect(helpers.handleCCYPrecision(currencies, 'btc', 4)).toBe(8);
         expect(helpers.handleCCYPrecision(currencies, 'trst', 4)).toBe(4);
     });

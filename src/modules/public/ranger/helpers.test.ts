@@ -14,11 +14,11 @@ describe('ranger helpers', () => {
 
     describe('formatTicker', () => {
         const tickerEvents: { [pair: string]: TickerEvent } = {
-            ethzar: {
+            ethrht: {
                 amount: '4.0',
-                name: 'ETH/ZAR',
+                name: 'ETH/RHT',
                 base_unit: 'eth',
-                quote_unit: 'zar',
+                quote_unit: 'rht',
                 low: '0.001',
                 high: '0.145',
                 last: '0.134',
@@ -58,7 +58,7 @@ describe('ranger helpers', () => {
             },
         };
         const tickers: { [pair: string]: Ticker } = {
-            ethzar: {
+            ethrht: {
                 amount: '4.0',
                 low: '0.001',
                 high: '0.145',

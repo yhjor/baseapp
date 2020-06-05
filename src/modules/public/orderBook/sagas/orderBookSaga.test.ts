@@ -25,10 +25,10 @@ describe('Saga: OrderBook', () => {
     });
 
     const fakeMarket: Market = {
-        id: 'btczar',
-        name: 'BTC/ZAR',
+        id: 'btcrht',
+        name: 'BTC/RHT',
         base_unit: 'btc',
-        quote_unit: 'zar',
+        quote_unit: 'rht',
         min_price: '0.0',
         max_price: '0.0',
         min_amount: '0.0',
@@ -49,8 +49,8 @@ describe('Saga: OrderBook', () => {
                 price: '0.99',
                 avg_price: '0.99',
                 state: 'wait',
-                market: 'btczar',
-                created_at: '2018-11-21T15:19:48+01:00',
+                market: 'btcrht',
+                created_at: '2019-11-21T15:19:48+01:00',
                 volume: '0.12',
                 remaining_volume: '0.09',
                 executed_volume: '0.03',
@@ -65,8 +65,8 @@ describe('Saga: OrderBook', () => {
                 price: '0.01',
                 avg_price: '0.01',
                 state: 'wait',
-                market: 'btczar',
-                created_at: '2018-12-14T14:20:12+01:00',
+                market: 'btcrht',
+                created_at: '2019-12-14T14:20:12+01:00',
                 volume: '0.1',
                 remaining_volume: '0.041',
                 executed_volume: '0.059',
@@ -78,7 +78,7 @@ describe('Saga: OrderBook', () => {
     };
 
     const mockOrderBook = () => {
-        mockAxios.onGet('/public/markets/btczar/order-book').reply(200, fakeOrderBook);
+        mockAxios.onGet('/public/markets/btcrht/order-book').reply(200, fakeOrderBook);
     };
 
     const expectedActionsFetch = [ orderBookFetch(fakeMarket), orderBookData(fakeOrderBook) ];

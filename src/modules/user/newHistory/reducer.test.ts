@@ -8,7 +8,7 @@ describe('newHistoryReducer', () => {
             created_at: '1555085773369',
             side: 'buy',
             type: 'deposit+withdraw',
-            market: 'btczar',
+            market: 'btcrht',
             price: 12,
             amount: 1,
             currency: 'btc',
